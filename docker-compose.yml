@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   pihole:
     container_name: pihole
@@ -9,10 +7,10 @@ services:
 
     environment:
       TZ: "Europe/Amsterdam"
-      WEBPASSWORD: "admin"                # change this
-      PIHOLE_DNS_: "127.0.0.1#5053"       # point Pi-hole to cloudflared DoH
+      WEBPASSWORD: "D0nk3rbr!l95"
+      PIHOLE_DNS_: "127.0.0.1#5053"
       DNSMASQ_LISTENING: "all"
-      ServerIP: "192.168.2.36"
+      ServerIP: "192.168.2.40"
       VIRTUAL_HOST: "pi.hole"
       SSL_CERT: "/etc/ssl/certs/pihole.crt"
       SSL_KEY: "/etc/ssl/private/pihole.key"
@@ -29,13 +27,10 @@ services:
       - /etc/ssl/certs/pihole.crt:/etc/ssl/certs/pihole.crt:ro
       - /etc/ssl/private/pihole.key:/etc/ssl/private/pihole.key:ro
 
-  cloudflared:
-    container_name: cloudflared
-    image: cloudflare/cloudflared:latest
+  dnscrypt-proxy:
+    container_name: dnscrypt-proxy
+    image: klutchell/dnscrypt-proxy:latest
     restart: unless-stopped
     network_mode: "host"
-    command: >
-      proxy-dns
-      --port 5053
-      --upstream https://1.1.1.1/dns-query
-      --upstream https://1.0.0.1/dns-query
+    volumes:
+      - ./dnscrypt-proxy.toml:/config/dnscrypt-proxy.toml:ro
