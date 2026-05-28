@@ -10,7 +10,7 @@ services:
       WEBPASSWORD: "${PIHOLE_PASSWORD}"
       PIHOLE_DNS_: "127.0.0.1#5053"
       DNSMASQ_LISTENING: "all"
-      ServerIP: "192.168.2.37"
+      ServerIP: "192.168.50.37"
       VIRTUAL_HOST: "pi.hole"
       SSL_CERT: "/etc/ssl/certs/pihole.crt"
       SSL_KEY: "/etc/ssl/private/pihole.key"
