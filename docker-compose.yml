@@ -7,7 +7,7 @@ services:
 
     environment:
       TZ: "Europe/Amsterdam"
-      WEBPASSWORD: "D0nk3rbr!l95"
+      WEBPASSWORD: "${PIHOLE_PASSWORD}"
       PIHOLE_DNS_: "127.0.0.1#5053"
       DNSMASQ_LISTENING: "all"
       ServerIP: "192.168.2.37"
